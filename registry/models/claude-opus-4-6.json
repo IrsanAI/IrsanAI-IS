@@ -1,0 +1,39 @@
+{
+  "id": "claude-opus-4-6",
+  "name": "Claude Opus 4.6",
+  "provider": "anthropic",
+  "version": "4.6",
+  "apiModelString": "claude-opus-4-6",
+  "slot": "primary-weapon",
+  "capabilities": [
+    "text-generation",
+    "code-generation",
+    "vision-understanding",
+    "function-calling",
+    "long-context",
+    "reasoning",
+    "structured-output"
+  ],
+  "contextWindow": 200000,
+  "essenceIds": [
+    "instruction-following",
+    "code-generation",
+    "long-context-reasoning",
+    "deep-reasoning",
+    "vision-understanding"
+  ],
+  "cost": {
+    "inputPerMToken": 15.0,
+    "outputPerMToken": 75.0,
+    "currency": "USD"
+  },
+  "isPublic": true,
+  "accessTier": "api",
+  "knowledgeCutoff": "2025-08-31",
+  "tags": [
+    "powerful",
+    "reasoning",
+    "complex-tasks"
+  ],
+  "notes": "Verify pricing at https://www.anthropic.com/pricing before production use."
+}

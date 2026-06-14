@@ -1,0 +1,26 @@
+{
+  "id": "claude-code",
+  "name": "Claude Code",
+  "description": "Anthropic agentic coding tool -- a pre-built character class for software engineering. Ships with code execution, filesystem access and git integration as default loadout.",
+  "type": "coding",
+  "provider": "anthropic",
+  "defaultLoadoutId": "software-engineering",
+  "internalModelId": "claude-sonnet-4-6",
+  "installUrl": "https://claude.ai/code",
+  "isPublic": true,
+  "fillsSlots": [
+    "primary-weapon",
+    "shoulders",
+    "chest"
+  ],
+  "essenceIds": [
+    "code-generation",
+    "long-context-reasoning"
+  ],
+  "tags": [
+    "coding",
+    "agentic",
+    "production-ready",
+    "anthropic"
+  ]
+}

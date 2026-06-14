@@ -1,0 +1,33 @@
+{
+  "id": "metacognitive-eval",
+  "name": "Metacognitive Self-Evaluation",
+  "description": "Ability to evaluate own output quality, identify uncertainty, flag errors before they propagate, and suggest corrective actions -- the IS Paragon system in essence form.",
+  "tier": "mythic",
+  "sourceModelId": "claude-mythos-preview",
+  "transferMethods": [
+    "system-prompt",
+    "few-shot",
+    "model-specific"
+  ],
+  "capabilities": [
+    "text-generation",
+    "reasoning"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "After every substantive response:\n- Rate your own confidence: [HIGH/MEDIUM/LOW]\n- Flag any assumptions made: 'ASSUMPTION: ...'\n- Identify what you would verify if you could: 'VERIFY: ...'\n- If confidence < MEDIUM, say so explicitly before the answer.",
+    "notes": "Partial transfer via system prompt. Full mythic-tier capability requires model-specific training."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "metacognition",
+    "quality",
+    "self-correction",
+    "paragon",
+    "mythic"
+  ]
+}

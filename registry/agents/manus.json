@@ -1,0 +1,25 @@
+{
+  "id": "manus",
+  "name": "Manus",
+  "description": "General-purpose autonomous desktop agent (Summoner build: coordinates multiple sub-agents). Can handle multi-step web research, form filling, file management and complex automations.",
+  "type": "desktop",
+  "provider": "manus.im",
+  "installUrl": "https://manus.im",
+  "isPublic": true,
+  "fillsSlots": [
+    "chest",
+    "shoulders",
+    "rings"
+  ],
+  "essenceIds": [
+    "multi-agent-coordination",
+    "browser-control",
+    "filesystem-access"
+  ],
+  "tags": [
+    "desktop",
+    "autonomous",
+    "multi-agent",
+    "web-automation"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "claude-mythos-preview",
+  "name": "Claude Mythos Preview",
+  "provider": "anthropic",
+  "version": "preview",
+  "apiModelString": "claude-mythos-preview",
+  "slot": "primary-weapon",
+  "capabilities": [
+    "text-generation",
+    "code-generation",
+    "vision-understanding",
+    "audio-understanding",
+    "function-calling",
+    "long-context",
+    "reasoning",
+    "structured-output",
+    "multimodal-output"
+  ],
+  "essenceIds": [
+    "mythos-advanced-reasoning",
+    "metacognitive-eval",
+    "instruction-following"
+  ],
+  "cost": {
+    "inputPerMToken": 0,
+    "outputPerMToken": 0,
+    "currency": "USD"
+  },
+  "isPublic": false,
+  "accessTier": "mythic",
+  "projectAccess": "glasswing",
+  "tags": [
+    "mythic",
+    "frontier",
+    "restricted",
+    "glasswing"
+  ],
+  "notes": "Only via Anthropic Project Glasswing. Specs undisclosed. See https://www.anthropic.com/glasswing"
+}

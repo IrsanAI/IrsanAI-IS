@@ -1,0 +1,38 @@
+{
+  "id": "gpt-4o",
+  "name": "GPT-4o",
+  "provider": "openai",
+  "version": "latest",
+  "apiModelString": "gpt-4o",
+  "slot": "primary-weapon",
+  "capabilities": [
+    "text-generation",
+    "code-generation",
+    "vision-understanding",
+    "audio-understanding",
+    "function-calling",
+    "long-context",
+    "real-time-grounding",
+    "structured-output"
+  ],
+  "contextWindow": 128000,
+  "essenceIds": [
+    "instruction-following",
+    "code-generation",
+    "vision-understanding",
+    "real-time-grounding"
+  ],
+  "cost": {
+    "inputPerMToken": 2.5,
+    "outputPerMToken": 10.0,
+    "currency": "USD"
+  },
+  "isPublic": true,
+  "accessTier": "api",
+  "tags": [
+    "flagship",
+    "multimodal",
+    "realtime"
+  ],
+  "notes": "Verify pricing at https://openai.com/pricing before production use."
+}

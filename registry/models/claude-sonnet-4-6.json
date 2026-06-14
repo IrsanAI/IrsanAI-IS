@@ -1,0 +1,38 @@
+{
+  "id": "claude-sonnet-4-6",
+  "name": "Claude Sonnet 4.6",
+  "provider": "anthropic",
+  "version": "4.6",
+  "apiModelString": "claude-sonnet-4-6",
+  "slot": "primary-weapon",
+  "capabilities": [
+    "text-generation",
+    "code-generation",
+    "vision-understanding",
+    "function-calling",
+    "long-context",
+    "structured-output"
+  ],
+  "contextWindow": 200000,
+  "essenceIds": [
+    "instruction-following",
+    "code-generation",
+    "long-context-reasoning",
+    "vision-understanding"
+  ],
+  "cost": {
+    "inputPerMToken": 3.0,
+    "outputPerMToken": 15.0,
+    "currency": "USD"
+  },
+  "isPublic": true,
+  "accessTier": "api",
+  "knowledgeCutoff": "2025-08-31",
+  "tags": [
+    "flagship",
+    "balanced",
+    "production-ready",
+    "multimodal"
+  ],
+  "notes": "Verify pricing at https://www.anthropic.com/pricing before production use."
+}

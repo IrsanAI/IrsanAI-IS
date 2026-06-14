@@ -1,0 +1,39 @@
+{
+  "id": "code-generation",
+  "name": "Code Generation",
+  "description": "High-fidelity generation of production-ready code across major languages. Strong in TypeScript, Python, Rust. Includes design patterns, error handling, testing and modern language idioms.",
+  "tier": "legendary",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "system-prompt",
+    "few-shot",
+    "prompt-pattern"
+  ],
+  "capabilities": [
+    "code-generation",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You are an expert [LANGUAGE] engineer.\nAlways:\n- Write production-ready, type-safe code\n- Include error handling and edge cases\n- Follow [STYLE_GUIDE] conventions\n- Add JSDoc/docstring for public APIs",
+    "notes": "Most effective when co-equipped with instruction-following essence."
+  },
+  "benchmarkDeltas": {
+    "humaneval": 0.12
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "off-hand",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [
+    "instruction-following"
+  ],
+  "tags": [
+    "coding",
+    "typescript",
+    "python",
+    "production",
+    "engineering"
+  ]
+}

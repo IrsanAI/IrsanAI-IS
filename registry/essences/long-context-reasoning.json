@@ -1,0 +1,32 @@
+{
+  "id": "long-context-reasoning",
+  "name": "Long Context Reasoning",
+  "description": "Ability to maintain coherent reasoning chains and cross-reference information across very large contexts (100k+ tokens), without losing track of earlier content.",
+  "tier": "legendary",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "system-prompt",
+    "prompt-pattern"
+  ],
+  "capabilities": [
+    "long-context",
+    "reasoning",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "When working with large documents:\n1. First summarize key sections you will need\n2. Reference section markers explicitly: [Section: NAME]\n3. When synthesizing, cite page/section: 'As stated in [Section: X]...'\n4. Flag any contradictions found across sections.",
+    "notes": "Works best when documents are pre-chunked with clear section markers."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "long-context",
+    "reasoning",
+    "documents",
+    "synthesis"
+  ]
+}

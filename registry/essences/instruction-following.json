@@ -1,0 +1,32 @@
+{
+  "id": "instruction-following",
+  "name": "Instruction Following",
+  "description": "Exceptional ability to understand and execute complex multi-step instructions with high fidelity, maintaining format constraints, role definitions and behavioral guidelines throughout a session.",
+  "tier": "legendary",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "system-prompt",
+    "few-shot",
+    "prompt-pattern"
+  ],
+  "capabilities": [
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You are [ROLE]. Strictly follow these rules:\n1. [RULE_1]\n2. [RULE_2]\nAlways respond in [FORMAT]. Never [CONSTRAINT].",
+    "notes": "Most effectively transferred via numbered rules + explicit format constraints in system prompt."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "off-hand",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "reliability",
+    "formatting",
+    "constraints",
+    "core"
+  ]
+}
