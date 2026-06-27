@@ -2,15 +2,18 @@
   "name": "irsanai-is",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "IrsanAI -- AI 360 Inventory System",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "clean": "turbo clean"
+    "clean": "turbo clean",
+    "example": "tsx --env-file=.env examples/basic-usage.ts"
   },
   "devDependencies": {
+    "tsx": "^4.22.4",
     "turbo": "^2.0.0",
     "typescript": "^5.5.0"
   },

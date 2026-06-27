@@ -1,0 +1,36 @@
+{
+  "id": "gemini-2-5-flash",
+  "name": "Gemini 2.5 Flash",
+  "provider": "google",
+  "version": "2.5-flash",
+  "apiModelString": "gemini-2.5-flash",
+  "slot": "primary-weapon",
+  "capabilities": [
+    "text-generation",
+    "code-generation",
+    "vision-understanding",
+    "long-context",
+    "structured-output",
+    "real-time-grounding"
+  ],
+  "contextWindow": 1000000,
+  "essenceIds": [
+    "instruction-following",
+    "long-context-reasoning"
+  ],
+  "cost": {
+    "inputPerMToken": 0.0,
+    "outputPerMToken": 0.0,
+    "currency": "USD"
+  },
+  "isPublic": true,
+  "accessTier": "public",
+  "tags": [
+    "free",
+    "fast",
+    "google",
+    "million-token-context",
+    "no-credit-card"
+  ],
+  "notes": "Free tier via Google AI Studio (aistudio.google.com). No credit card required."
+}
