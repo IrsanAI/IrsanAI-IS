@@ -41,6 +41,8 @@ added.
 validation guidance.
 5. Agent instructions were extended with a system-architectural and
 metacognitive OODA workflow.
+6. A Windows/PyCharm Supabase tracking smoke test reached 6 tracked routes with
+6 feedback entries, 100% correctness, 5.0 average rating, and a stable trend.
 
 ## Intent Scoring Model
 
@@ -124,3 +126,6 @@ Before implementing it, inspect:
 - `registry/loadouts/*.json`
 
 Then update validation notes and benchmark expectations after implementation.
+
+Before relying on optimizer recommendations, collect at least 10 feedback
+entries as noted by the current analyzer output and benchmark log.

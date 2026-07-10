@@ -235,6 +235,7 @@ This repo includes durable collaboration guidance for AI assistants:
 - [`docs/AI_DECISIONS.md`](./docs/AI_DECISIONS.md) is the shared decision and veto log.
 - [`docs/NEXT_STEPS.md`](./docs/NEXT_STEPS.md) captures ranked continuation work.
 - [`docs/LOW_SCORE_BACKLOG.md`](./docs/LOW_SCORE_BACKLOG.md) keeps considered but deferred ideas.
+- [`docs/BENCHMARK_LOG.md`](./docs/BENCHMARK_LOG.md) records concrete validation runs.
 
 Future AI work should avoid hiding important product reasoning only in chat
 history. If a decision matters later, it belongs in the repo.
