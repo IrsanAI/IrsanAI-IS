@@ -15,6 +15,9 @@ create index if not exists is_feedback_route_id_idx
 
 alter table public.is_feedback enable row level security;
 
+grant usage on schema public to service_role;
+grant all on table public.is_feedback to service_role;
+
 comment on table public.is_feedback is
   'IrsanAI IS -- Manual ground truth signal. correct=true means the IS chose the right loadout.';
 

@@ -13,9 +13,8 @@ import { IS } from '../packages/is-core/src/index.js'
 const is = new IS({
   registryPath:    './registry',
   classifierModel: 'gemini-2.5-flash',
-  // Uncomment when Supabase is configured:
-  // supabaseUrl: process.env.SUPABASE_URL,
-  // supabaseKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  supabaseUrl: process.env.SUPABASE_URL,
+  supabaseKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
 })
 
 console.log('\n[IS] Routing task...\n')
