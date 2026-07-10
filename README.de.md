@@ -234,6 +234,8 @@ Dieses Repo enthält dauerhafte Kollaborationshinweise für KI-Assistenten:
 - [`AGENTS.md`](./AGENTS.md) enthält Repo-Level-Anweisungen für zukünftige Agenten.
 - [`docs/AI_COLLABORATION.md`](./docs/AI_COLLABORATION.md) erklärt den Codex-/Claude-Handoff.
 - [`docs/AI_DECISIONS.md`](./docs/AI_DECISIONS.md) ist das gemeinsame Decision- und Veto-Log.
+- [`docs/NEXT_STEPS.md`](./docs/NEXT_STEPS.md) dokumentiert gerankte Fortsetzungsarbeit.
+- [`docs/LOW_SCORE_BACKLOG.md`](./docs/LOW_SCORE_BACKLOG.md) bewahrt geprüfte, aber zurückgestellte Ideen.
 
 Zukünftige KI-Arbeit sollte wichtige Produktentscheidungen nicht nur im Chatverlauf
 verstecken. Wenn eine Entscheidung später relevant ist, gehört sie ins Repo.

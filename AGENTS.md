@@ -47,6 +47,31 @@ that into this concrete workflow:
    routing quality, or validation, update the relevant docs or benchmark notes.
 5. Prefer measurable outcomes over vague improvements.
 
+## Continuation Trigger
+
+When the human says "setze fort", "fahre im Projekt fort", "mach weiter",
+"continue", or uses a semantically similar short continuation request, run this
+default project-continuation routine instead of waiting for a long prompt:
+
+1. Read `AGENTS.md`, `docs/NEXT_STEPS.md`, `docs/LOW_SCORE_BACKLOG.md`,
+   `docs/AI_DECISIONS.md`, and the relevant source files for the top-ranked
+   candidate.
+2. Summarize what the project currently has, what the latest meaningful steps
+   were, and what the next likely system boundary is.
+3. Generate or refresh a ranked candidate list using the intent scoring model in
+   `docs/NEXT_STEPS.md`.
+4. Move candidates scoring 80+ into the planned section of `docs/NEXT_STEPS.md`;
+   keep candidates below 80 in `docs/LOW_SCORE_BACKLOG.md` with the reason they
+   did not pass.
+5. Pick the highest-scoring reversible step, implement it if it is safe and
+   bounded, and update validation/benchmark notes.
+6. If implementation is not yet safe, only update the plan docs and clearly
+   state the blocker.
+7. Run the relevant checks, commit the result, and create a PR.
+
+The default next implementation priority should be the highest-scoring item in
+`docs/NEXT_STEPS.md` unless the human gives a more specific instruction.
+
 ## Public Repository Boundary
 
 Assume committed documentation may be public. Keep strategic notes useful for

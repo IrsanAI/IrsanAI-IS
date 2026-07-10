@@ -233,6 +233,8 @@ This repo includes durable collaboration guidance for AI assistants:
 - [`AGENTS.md`](./AGENTS.md) gives repo-level instructions to future agents.
 - [`docs/AI_COLLABORATION.md`](./docs/AI_COLLABORATION.md) explains the Codex / Claude handoff.
 - [`docs/AI_DECISIONS.md`](./docs/AI_DECISIONS.md) is the shared decision and veto log.
+- [`docs/NEXT_STEPS.md`](./docs/NEXT_STEPS.md) captures ranked continuation work.
+- [`docs/LOW_SCORE_BACKLOG.md`](./docs/LOW_SCORE_BACKLOG.md) keeps considered but deferred ideas.
 
 Future AI work should avoid hiding important product reasoning only in chat
 history. If a decision matters later, it belongs in the repo.
