@@ -12,6 +12,9 @@ create table if not exists public.is_routing_weights (
 
 alter table public.is_routing_weights enable row level security;
 
+grant usage on schema public to service_role;
+grant all on table public.is_routing_weights to service_role;
+
 comment on table public.is_routing_weights is
   'IrsanAI IS -- Runtime routing weight overrides written by SelfOptimizer. Source of truth remains registry JSON.';
 
