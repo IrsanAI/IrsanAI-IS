@@ -29,6 +29,24 @@ Do not leave important product reasoning only in chat history. If a decision wil
 matter later, document it in `docs/AI_DECISIONS.md`, `docs/PRODUCT_STRATEGY.md`,
 or a dedicated file under `docs/decisions/`.
 
+## System-Architectural + Metacognitive Mode
+
+When the human asks to work "systemarchitektonisch und metakognitiv", translate
+that into this concrete workflow:
+
+1. Define the system boundary: packages, data flow, runtime dependencies, and
+   user-facing behavior.
+2. Separate observation from interpretation: first state what the repo or logs
+   show, then state what you infer from it.
+3. Use an OODA-style loop for implementation work:
+   - Observe: inspect files, current behavior, errors, and benchmarks.
+   - Orient: identify constraints, risks, and likely root causes.
+   - Decide: choose the smallest reversible change that improves the system.
+   - Act: implement, test, document, and commit.
+4. Preserve future learning: if the change affects strategy, architecture,
+   routing quality, or validation, update the relevant docs or benchmark notes.
+5. Prefer measurable outcomes over vague improvements.
+
 ## Public Repository Boundary
 
 Assume committed documentation may be public. Keep strategic notes useful for
