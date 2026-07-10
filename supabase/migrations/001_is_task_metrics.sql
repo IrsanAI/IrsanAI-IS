@@ -20,5 +20,8 @@ create index if not exists is_task_metrics_created_at_idx on public.is_task_metr
 
 alter table public.is_task_metrics enable row level security;
 
+grant usage on schema public to service_role;
+grant all on table public.is_task_metrics to service_role;
+
 comment on table public.is_task_metrics is
   'IrsanAI IS -- Task routing metrics for metacognitive self-optimization (Paragon System)';
