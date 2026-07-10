@@ -60,6 +60,28 @@ pnpm install
 pnpm build
 ```
 
+### Optional: Supabase tracking
+
+The example can write route metrics to Supabase when these environment variables
+are present:
+
+```dotenv
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<legacy-service-role-secret>
+```
+
+Use the project base URL only -- do not append `/rest/v1/`. If your Supabase
+project has **Automatically expose new tables** disabled, run the SQL migrations
+in `supabase/migrations/`; they include the required `service_role` grants for
+the RLS-protected tracking tables.
+
+After the migrations and environment variables are in place, `pnpm example`
+should print a real UUID for `Route ID`, save feedback through
+`PerformanceTracker`, and show at least one tracked route in the analysis report.
+If `Route ID` is `(no Supabase -- tracking off)` or the console prints
+`permission denied for table is_task_metrics`, re-check the base URL, legacy
+`service_role` key, and migration grants.
+
 ### Using @irsanai/schemas
 
 ```typescript
