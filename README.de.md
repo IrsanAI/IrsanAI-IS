@@ -46,6 +46,8 @@ Bausteinen:
 - manuelles Feedback für geroutete Aufgaben,
 - eine Self-Analysis-Schicht, die Routing-Qualität und Empfehlungen zusammenfasst,
 - ein Self-Optimizer-Grundgerüst, das nach genug Feedback dynamische Routing-Weights schreiben kann,
+- dynamische Routing-Weights können vom Router konsumiert werden, wenn Supabase
+konfiguriert ist,
 - ein lauffähiger `pnpm example` Ablauf für Routing, Feedback und Analyse.
 
 Das Projekt ist damit nicht mehr nur eine Schema-Registry. Es besitzt bereits
@@ -221,7 +223,8 @@ sichere technische Konsequenz committed werden.
 | 1 | Zod-Schemas + Registry-Seed-Daten | Erledigt |
 | 2 | IS Core: Task-Klassifizierung + Loadout-Router | Erledigt |
 | 2b | Metakognitiver Loop: Tracking, Feedback, Analyse | Aktiv |
-| 2c | Optimizer-Integration in Routing-Entscheidungen | Als Nächstes |
+| 2c | Dynamische Routing-Weights werden vom Router konsumiert | Erledigt |
+| 2d | Registry-Validierungscommand | Als Nächstes |
 | 3 | Dashboard: Next.js + Supabase Inventory Screen | Geplant |
 | 4 | SDK: @irsanai/sdk npm publish | Geplant |
 

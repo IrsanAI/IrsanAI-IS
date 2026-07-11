@@ -47,6 +47,8 @@ blocks:
 - a self-analysis layer that summarizes route quality and recommendations,
 - a self-optimizer skeleton that can write dynamic routing weights after enough
 feedback exists,
+- dynamic routing weights can be consumed by the router when Supabase is
+configured,
 - a runnable `pnpm example` flow for routing, feedback, and analysis.
 
 This means the project is no longer only a schema registry. It now has an early
@@ -220,7 +222,8 @@ committed.
 | 1 | Zod schemas + registry seed data | Done |
 | 2 | IS Core: task classifier + loadout router | Done |
 | 2b | Metacognitive loop: tracking, feedback, analysis | Active |
-| 2c | Optimizer integration into routing decisions | Next |
+| 2c | Dynamic routing weights consumed by router | Done |
+| 2d | Registry validation command | Next |
 | 3 | Dashboard: Next.js + Supabase inventory screen | Planned |
 | 4 | SDK: @irsanai/sdk npm publish | Planned |
 

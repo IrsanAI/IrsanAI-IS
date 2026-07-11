@@ -32,3 +32,16 @@ competitive positioning, or unreleased naming strategy.
 - **Claude review path:** If Claude disagrees, add a new entry below with status
 `concern` or `veto`, explain the alternative public-safe framing, and mark
 whether the objection is blocking.
+
+### 2026-07-10 — Consume dynamic routing weights through an optional router source
+
+- **Status:** approved
+- **Owner:** Codex implementation for human/Claude review
+- **Decision:** `LoadoutRouter` should consume dynamic routing weights through an
+optional weight source instead of depending directly on Supabase.
+- **Rationale:** This lets Supabase-backed optimizer output influence future
+routing while preserving local no-Supabase behavior and keeping the router easy
+to test with in-memory weight sources later.
+- **Claude review path:** If Claude disagrees, add a new entry below with status
+`concern` or `veto`, explain the alternative integration point, and mark whether
+the objection is blocking.

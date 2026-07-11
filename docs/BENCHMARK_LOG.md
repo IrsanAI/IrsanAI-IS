@@ -50,6 +50,6 @@ early for trusted recommendations.
 
 ### Follow-up
 
-After reaching 10+ feedback entries, the next implementation priority remains
-connecting dynamic routing weights to `LoadoutRouter`, as documented in
+Dynamic routing weights have since been connected to `LoadoutRouter`. The next
+implementation priority is a registry validation command, as documented in
 `docs/NEXT_STEPS.md`.

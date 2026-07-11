@@ -49,7 +49,6 @@ export class IS {
     this.loadouts = new LoadoutManager(registryPath)
 
     const classifier = new TaskClassifier(config.classifierModel ?? 'gemini-2.5-flash')
-    this.router = new LoadoutRouter(classifier, this.loadouts, this.models, this.essences)
 
     if (config.supabaseUrl && config.supabaseKey) {
       this.tracker   = new PerformanceTracker(config.supabaseUrl, config.supabaseKey)
@@ -60,6 +59,14 @@ export class IS {
       this.analyzer  = null
       this.optimizer = null
     }
+
+    this.router = new LoadoutRouter(
+      classifier,
+      this.loadouts,
+      this.models,
+      this.essences,
+      this.optimizer ?? undefined,
+    )
   }
 
   async init(): Promise<this> {

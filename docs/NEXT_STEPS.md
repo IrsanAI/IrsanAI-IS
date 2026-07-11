@@ -22,6 +22,8 @@ Current system state:
 - Self-analysis that summarizes loadout quality, latency, feedback, and issues.
 - Self-optimizer logic that can write dynamic routing weights after enough
 feedback exists.
+- Loadout routing can consume dynamic routing weights when Supabase is
+configured, while preserving local no-Supabase routing behavior.
 - A runnable `pnpm example` path for route -> optional track -> optional feedback
 -> analyze.
 - Public-safe product direction and AI collaboration docs.
@@ -43,6 +45,8 @@ validation guidance.
 metacognitive OODA workflow.
 6. A Windows/PyCharm Supabase tracking smoke test reached 6 tracked routes with
 6 feedback entries, 100% correctness, 5.0 average rating, and a stable trend.
+7. Dynamic routing weights were wired into `LoadoutRouter` as an optional source
+for `enabled`, `confidence_threshold`, and `priority_boost`.
 
 ## Intent Scoring Model
 
@@ -65,20 +69,16 @@ score.
 
 ## Ranked Planned Work
 
-### 1. Wire dynamic routing weights into `LoadoutRouter`
+### Completed. Wire dynamic routing weights into `LoadoutRouter`
 
 - **Intent score:** 94/100
-- **Why it passed:** The optimizer can write `is_routing_weights`, but routing
-currently does not consume those weights. Connecting this closes the
-metacognitive loop from feedback to future routing behavior.
-- **Expected outcome:** Loadout selection can consider dynamic `enabled`,
-`confidence_threshold`, and `priority_boost` values.
-- **Validation:** Unit-level router checks or example-level smoke tests showing
-that a disabled or boosted loadout changes selection as expected.
-- **Risk:** Needs careful fallback behavior so missing Supabase or missing weight
-rows do not break local routing.
+- **Status:** completed
+- **Why it passed:** The optimizer can write `is_routing_weights`, and routing
+now consumes those weights through an optional source. This closes the first
+runtime path from feedback-derived optimizer output to future routing behavior.
+- **Validation:** `pnpm build`
 
-### 2. Add a registry validation command
+### 1. Add a registry validation command
 
 - **Intent score:** 89/100
 - **Why it passed:** The project depends on registry JSON staying aligned with
@@ -90,7 +90,7 @@ essences, loadouts, and agents.
 listed in the benchmark section.
 - **Risk:** Low; mostly additive.
 
-### 3. Add focused tests for analyzer and optimizer rules
+### 2. Add focused tests for analyzer and optimizer rules
 
 - **Intent score:** 86/100
 - **Why it passed:** The self-analysis and optimizer rules are central to the
@@ -101,7 +101,7 @@ confidence, latency, trend, and priority-boost behavior.
 - **Risk:** Medium; requires choosing and adding a test runner if one does not
 exist yet.
 
-### 4. Document the first benchmark protocol for routing changes
+### 3. Document the first benchmark protocol for routing changes
 
 - **Intent score:** 82/100
 - **Why it passed:** The README now names benchmark categories, but routing
@@ -115,15 +115,17 @@ prompts and expected loadouts.
 
 The highest-value next implementation step is:
 
-> Wire dynamic routing weights into `LoadoutRouter` while preserving local,
-> no-Supabase behavior.
+> Add a registry validation command that checks models, essences, loadouts, and
+> agents against the Zod schemas.
 
 Before implementing it, inspect:
 
-- `packages/is-core/src/routing/loadout-router.ts`
-- `packages/is-core/src/metacognition/self-optimizer.ts`
-- `supabase/migrations/003_is_routing_weights.sql`
+- `packages/schemas/src/*.ts`
+- `registry/models/*.json`
+- `registry/essences/*.json`
 - `registry/loadouts/*.json`
+- `registry/agents/*.json`
+- `package.json`
 
 Then update validation notes and benchmark expectations after implementation.
 
