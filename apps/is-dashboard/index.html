@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IrsanAI IS — Inventory Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --bg:       #0d0f14;
+    --bg2:      #13161e;
+    --bg3:      #1a1e28;
+    --border:   #2a2f3f;
+    --text:     #e2e6f0;
+    --muted:    #6b7280;
+    --mythic:   #f59e0b;
+    --legendary:#a78bfa;
+    --rare:     #60a5fa;
+    --common:   #34d399;
+    --red:      #f87171;
+    --green:    #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* ── Header ── */
+  header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+  .logo { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .logo span { color: var(--legendary); }
+  .badge { font-size: 10px; padding: 2px 8px; border-radius: 99px; background: var(--bg3); border: 1px solid var(--border); color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-left: auto; box-shadow: 0 0 6px var(--green); }
+  .dot.off { background: var(--red); box-shadow: 0 0 6px var(--red); }
+
+  /* ── Layout ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; gap: 20px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media(max-width:768px) { .grid2,.grid3 { grid-template-columns: 1fr; } }
+
+  /* ── Cards ── */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .card-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 14px; }
+  .stat-big { font-size: 36px; font-weight: 700; line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Slots ── */
+  .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .slot { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+  .slot-label { font-size: 10px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .slot-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .slot-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .tier-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; }
+  .tier-mythic    { background: var(--mythic); }
+  .tier-legendary { background: var(--legendary); }
+  .tier-rare      { background: var(--rare); }
+  .tier-common    { background: var(--common); }
+
+  /* ── Table ── */
+  .tbl { width: 100%; border-collapse: collapse; }
+  .tbl th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  .tbl td { padding: 9px 10px; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: var(--bg3); }
+
+  /* ── Pills ── */
+  .pill { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+  .pill-green { background: #052e16; color: var(--green); border: 1px solid #166534; }
+  .pill-red   { background: #2d0a0a; color: var(--red);   border: 1px solid #7f1d1d; }
+  .pill-amber { background: #1c1100; color: var(--mythic); border: 1px solid #78350f; }
+  .pill-blue  { background: #0c1a2e; color: var(--rare);  border: 1px solid #1e3a5f; }
+
+  /* ── Progress ── */
+  .bar-track { background: var(--bg3); border-radius: 99px; height: 6px; overflow: hidden; }
+  .bar-fill  { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
+
+  /* ── Loadout Insights ── */
+  .insight { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .insight-id { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .insight-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+  .insight-key { color: var(--muted); }
+  .trend-improving { color: var(--green); }
+  .trend-degrading { color: var(--red); }
+  .trend-stable { color: var(--rare); }
+  .trend-no-data { color: var(--muted); }
+
+  /* ── Config warning ── */
+  .warning { background: #1c1100; border: 1px solid #78350f; border-radius: 10px; padding: 16px 20px; color: var(--mythic); font-size: 13px; line-height: 1.6; }
+  .warning input { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 12px; padding: 6px 10px; width: 100%; margin-top: 6px; font-family: monospace; }
+  .warning button { margin-top: 10px; background: var(--legendary); color: #0d0f14; border: none; border-radius: 6px; padding: 7px 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+  .loading { color: var(--muted); font-size: 12px; padding: 20px 0; text-align: center; }
+  .section-title { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">IrsanAI <span>IS</span></div>
+  <div class="badge">AI 360° Inventory System</div>
+  <div class="badge" id="ver-badge">v0.3.0</div>
+  <div id="conn-dot" class="dot off" title="Supabase connection"></div>
+</header>
+
+<main>
+
+  <!-- Config -->
+  <div id="config-panel" class="warning">
+    ⚙️ Supabase not configured. Enter your project credentials to connect the live dashboard.
+    <br>
+    <input id="inp-url" placeholder="SUPABASE_URL — https://xxxx.supabase.co" />
+    <input id="inp-key" placeholder="SUPABASE_ANON_KEY — eyJ..." style="margin-top:6px" />
+    <button onclick="connect()">Connect</button>
+  </div>
+
+  <!-- KPI row -->
+  <div class="grid3" id="kpi-row" style="display:none">
+    <div class="card">
+      <div class="card-title">Total Routes</div>
+      <div class="stat-big" id="kpi-routes">—</div>
+      <div class="stat-label">tracked in Supabase</div>
+    </div>
+    <div class="card">
+      <div class="card-title">With Feedback</div>
+      <div class="stat-big" id="kpi-feedback">—</div>
+      <div class="stat-label">manual ground truth</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Overall Correctness</div>
+      <div class="stat-big" id="kpi-correct">—</div>
+      <div class="stat-label">feedback-rated</div>
+    </div>
+  </div>
+
+  <!-- Active Loadout (Inventory) -->
+  <div class="card" id="inv-card" style="display:none">
+    <div class="card-title">Active Inventory — Equipment Slots</div>
+    <div class="slot-grid" id="slot-grid"></div>
+  </div>
+
+  <!-- Loadout Insights -->
+  <div id="insights-section" style="display:none">
+    <div class="section-title">Loadout Performance</div>
+    <div class="grid3" id="insights-grid"></div>
+  </div>
+
+  <!-- Recent Routes -->
+  <div class="card" id="routes-card" style="display:none">
+    <div class="card-title">Recent Routes</div>
+    <div style="overflow-x:auto">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Task</th><th>Type</th><th>Loadout</th><th>Conf</th><th>Latency</th><th>Feedback</th><th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="routes-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Routing Weights -->
+  <div class="card" id="weights-card" style="display:none">
+    <div class="card-title">SelfOptimizer — Active Routing Weights</div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Loadout</th><th>Conf Threshold</th><th>Priority Boost</th><th>Reason</th><th>Updated</th></tr>
+      </thead>
+      <tbody id="weights-body"></tbody>
+    </table>
+  </div>
+
+</main>
+
+<script>
+const REGISTRY = {
+  slots: [
+    { id:'primary',   label:'Primary Weapon',  icon:'⚔️',  desc:'Core LLM',          value:'Claude Sonnet 4.6',  tier:'legendary' },
+    { id:'offhand',   label:'Off-hand',         icon:'🪄',  desc:'Specialist LLM',    value:'Claude Opus 4.6',    tier:'legendary' },
+    { id:'helmet',    label:'Helmet',           icon:'🧠',  desc:'Memory System',     value:'Supabase pgvector',  tier:'rare'      },
+    { id:'chest',     label:'Chest Armor',      icon:'🛡️',  desc:'Orchestration',     value:'@irsanai/is-core',   tier:'legendary' },
+    { id:'shoulders', label:'Shoulders',        icon:'🔌',  desc:'MCP Tools',         value:'code-exec / git',    tier:'rare'      },
+    { id:'rings',     label:'Rings',            icon:'💍',  desc:'API Integrations',  value:'Supabase / GitHub',  tier:'rare'      },
+    { id:'neck',      label:'Necklace',         icon:'📿',  desc:'IS Meta-Router',    value:'Gemini 2.5 Flash',   tier:'legendary' },
+    { id:'mythic',    label:'Mythic Slot',      icon:'⚡',  desc:'Project Glasswing', value:'Mythos Preview',     tier:'mythic'    },
+  ]
+}
+
+let sb = null
+
+function connect() {
+  const url = document.getElementById('inp-url').value.trim()
+  const key = document.getElementById('inp-key').value.trim()
+  if (!url || !key) { alert('Both URL and Key are required.'); return }
+  try {
+    sb = window.supabase.createClient(url, key)
+    localStorage.setItem('is_url', url)
+    localStorage.setItem('is_key', key)
+    document.getElementById('config-panel').style.display = 'none'
+    document.getElementById('conn-dot').classList.remove('off')
+    loadAll()
+  } catch(e) {
+    alert('Connection failed: ' + e.message)
+  }
+}
+
+// Auto-connect from localStorage
+window.addEventListener('load', () => {
+  const url = localStorage.getItem('is_url')
+  const key = localStorage.getItem('is_key')
+  if (url && key) {
+    document.getElementById('inp-url').value = url
+    document.getElementById('inp-key').value = key
+    connect()
+  }
+  renderSlots()
+})
+
+function renderSlots() {
+  const g = document.getElementById('slot-grid')
+  g.innerHTML = REGISTRY.slots.map(s => `
+    <div class="slot">
+      <div class="slot-label">${s.icon} ${s.label}</div>
+      <div class="slot-name">
+        <span class="tier-dot tier-${s.tier}"></span>${s.value}
+      </div>
+      <div class="slot-sub">${s.desc}</div>
+    </div>
+  `).join('')
+  document.getElementById('inv-card').style.display = ''
+}
+
+async function loadAll() {
+  await Promise.all([loadKPI(), loadRoutes(), loadWeights()])
+}
+
+async function loadKPI() {
+  const { data } = await sb.from('is_task_metrics')
+    .select('id, loadout_id, confidence, latency_ms, success, is_feedback(correct, rating)')
+    .order('created_at', { ascending: false })
+    .limit(200)
+
+  if (!data) return
+
+  const total    = data.length
+  const fbRows   = data.filter(r => r.is_feedback?.length > 0)
+  const correct  = fbRows.filter(r => r.is_feedback[0]?.correct).length
+  const pct      = fbRows.length > 0 ? Math.round(correct / fbRows.length * 100) : 0
+
+  document.getElementById('kpi-routes').textContent   = total
+  document.getElementById('kpi-feedback').textContent = fbRows.length
+  document.getElementById('kpi-correct').textContent  = pct + '%'
+  document.getElementById('kpi-row').style.display    = ''
+
+  // Insights per loadout
+  const byLoadout = {}
+  for (const r of data) {
+    if (!byLoadout[r.loadout_id]) byLoadout[r.loadout_id] = []
+    byLoadout[r.loadout_id].push(r)
+  }
+
+  const ig = document.getElementById('insights-grid')
+  ig.innerHTML = Object.entries(byLoadout).map(([id, rows]) => {
+    const fb      = rows.filter(r => r.is_feedback?.length > 0)
+    const corr    = fb.filter(r => r.is_feedback[0]?.correct)
+    const ratings = fb.map(r => r.is_feedback[0]?.rating).filter(Boolean)
+    const avgConf = Math.round(rows.reduce((s,r) => s + r.confidence,0) / rows.length * 100)
+    const avgLat  = Math.round(rows.reduce((s,r) => s + r.latency_ms,0) / rows.length)
+    const corrPct = fb.length > 0 ? Math.round(corr.length / fb.length * 100) : null
+    const avgRat  = ratings.length > 0 ? (ratings.reduce((a,b)=>a+b,0)/ratings.length).toFixed(1) : null
+    const corrColor = corrPct === null ? 'var(--muted)' : corrPct >= 85 ? 'var(--green)' : corrPct >= 70 ? 'var(--mythic)' : 'var(--red)'
+    return `
+      <div class="insight">
+        <div class="insight-id">${id}</div>
+        <div class="insight-row"><span class="insight-key">Samples</span><span>${rows.length} (${fb.length} w/ feedback)</span></div>
+        <div class="insight-row"><span class="insight-key">Avg Confidence</span><span>${avgConf}%</span></div>
+        <div class="insight-row"><span class="insight-key">Avg Latency</span><span>${avgLat}ms</span></div>
+        <div class="insight-row"><span class="insight-key">Correctness</span>
+          <span style="color:${corrColor}">${corrPct !== null ? corrPct + '%' : 'no feedback'}</span>
+        </div>
+        <div class="insight-row"><span class="insight-key">Avg Rating</span><span>${avgRat ?? 'n/a'} / 5</span></div>
+        ${corrPct !== null ? `
+        <div class="bar-track" style="margin-top:8px">
+          <div class="bar-fill" style="width:${corrPct}%;background:${corrColor}"></div>
+        </div>` : ''}
+      </div>
+    `
+  }).join('')
+  document.getElementById('insights-section').style.display = ''
+}
+
+async function loadRoutes() {
+  const { data } = await sb.from('is_task_metrics')
+    .select('task_text, task_type, loadout_id, confidence, latency_ms, created_at, is_feedback(correct, rating)')
+    .order('created_at', { ascending: false })
+    .limit(20)
+
+  if (!data) return
+
+  const tbody = document.getElementById('routes-body')
+  tbody.innerHTML = data.map(r => {
+    const fb     = r.is_feedback?.[0]
+    const conf   = Math.round(r.confidence * 100)
+    const latCls = r.latency_ms > 4000 ? 'var(--red)' : r.latency_ms > 2000 ? 'var(--mythic)' : 'var(--green)'
+    const ts     = new Date(r.created_at).toLocaleString('de-DE', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' })
+    const task   = r.task_text.length > 55 ? r.task_text.slice(0, 55) + '…' : r.task_text
+    const fbBadge = fb
+      ? (fb.correct ? '<span class="pill pill-green">✓ ' + fb.rating + '/5</span>' : '<span class="pill pill-red">✗ ' + fb.rating + '/5</span>')
+      : '<span class="pill" style="color:var(--muted);border-color:var(--border)">—</span>'
+    return `
+      <tr>
+        <td style="max-width:260px;color:var(--muted)">${task}</td>
+        <td><span class="pill pill-blue">${r.task_type}</span></td>
+        <td>${r.loadout_id}</td>
+        <td>${conf}%</td>
+        <td style="color:${latCls}">${r.latency_ms}ms</td>
+        <td>${fbBadge}</td>
+        <td style="color:var(--muted)">${ts}</td>
+      </tr>`
+  }).join('')
+  document.getElementById('routes-card').style.display = ''
+}
+
+async function loadWeights() {
+  const { data } = await sb.from('is_routing_weights')
+    .select('*').order('updated_at', { ascending: false })
+
+  if (!data || data.length === 0) return
+
+  const tbody = document.getElementById('weights-body')
+  tbody.innerHTML = data.map(w => {
+    const boost = w.priority_boost > 0 ? '<span class="pill pill-green">+' + w.priority_boost + '</span>'
+                : w.priority_boost < 0 ? '<span class="pill pill-red">'  + w.priority_boost + '</span>'
+                : '<span style="color:var(--muted)">0</span>'
+    const ts = new Date(w.updated_at).toLocaleString('de-DE', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
+    return `<tr>
+      <td>${w.loadout_id}</td>
+      <td>${(w.confidence_threshold * 100).toFixed(0)}%</td>
+      <td>${boost}</td>
+      <td style="color:var(--muted);max-width:320px">${w.reason ?? '—'}</td>
+      <td style="color:var(--muted)">${ts}</td>
+    </tr>`
+  }).join('')
+  document.getElementById('weights-card').style.display = ''
+}
+</script>
+</body>
+</html>
