@@ -1,0 +1,37 @@
+{
+  "id": "deep-reasoning",
+  "name": "Deep Reasoning",
+  "description": "Extended chain-of-thought reasoning for complex multi-step problems. Strong in formal logic, mathematical proofs, causal analysis, and problems that require holding many interdependent constraints simultaneously.",
+  "tier": "legendary",
+  "sourceModelId": "claude-opus-4-6",
+  "transferMethods": [
+    "system-prompt",
+    "few-shot",
+    "prompt-pattern"
+  ],
+  "capabilities": [
+    "reasoning",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "Think step by step. Before answering:\n1. Restate the problem in your own words\n2. Identify all constraints and dependencies\n3. Work through each step explicitly\n4. Check your answer against the original constraints\nShow all reasoning -- do not skip steps.",
+    "notes": "Chain-of-thought prompting transfers this essence effectively. Works best on models with large context windows."
+  },
+  "benchmarkDeltas": {
+    "MATH": 0.14,
+    "GPQA": 0.11
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "reasoning",
+    "logic",
+    "math",
+    "complex-tasks",
+    "chain-of-thought"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "vision-understanding",
+  "name": "Vision Understanding",
+  "description": "Ability to analyze and reason over images, diagrams, screenshots, and visual content. Includes OCR, layout understanding, chart interpretation, and multi-image comparison.",
+  "tier": "legendary",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "system-prompt",
+    "few-shot"
+  ],
+  "capabilities": [
+    "vision-understanding",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You are analyzing visual content. For each image:\n1. Describe what you see structurally\n2. Extract all text via OCR\n3. Identify charts, diagrams, or UI elements\n4. Answer the user's specific question about the visual",
+    "notes": "Partial transfer via system prompt. Full capability requires a natively multimodal model."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "off-hand",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "multimodal",
+    "vision",
+    "ocr",
+    "images",
+    "diagrams"
+  ]
+}

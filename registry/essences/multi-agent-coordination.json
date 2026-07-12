@@ -1,0 +1,36 @@
+{
+  "id": "multi-agent-coordination",
+  "name": "Multi-Agent Coordination",
+  "description": "Ability to decompose complex tasks into sub-tasks, delegate them to specialized agents or tools, track their outputs, and synthesize results into a coherent response. The Summoner build in agent architecture.",
+  "tier": "legendary",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "system-prompt",
+    "prompt-pattern",
+    "tool-config"
+  ],
+  "capabilities": [
+    "function-calling",
+    "text-generation",
+    "reasoning"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You are an orchestrator agent. When given a complex task:\n1. Decompose it into atomic sub-tasks\n2. Assign each sub-task to the most appropriate tool or agent\n3. Execute sub-tasks in parallel where possible, sequentially where order matters\n4. Validate each sub-task output before proceeding\n5. Synthesize all outputs into a final coherent response\nAlways report which agents/tools were used and why.",
+    "notes": "Requires a multi-tool or multi-agent runtime. Works with LangGraph, CrewAI, or MCP multi-server setups."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [
+    "instruction-following"
+  ],
+  "tags": [
+    "multi-agent",
+    "orchestration",
+    "delegation",
+    "decomposition",
+    "agentic"
+  ]
+}

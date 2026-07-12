@@ -1,0 +1,33 @@
+{
+  "id": "real-time-grounding",
+  "name": "Real-Time Grounding",
+  "description": "Ability to access and cite current information beyond training cutoff via web search, live APIs, or retrieval tools. Prevents hallucination on time-sensitive facts.",
+  "tier": "rare",
+  "sourceModelId": "gpt-4o",
+  "transferMethods": [
+    "tool-config",
+    "system-prompt"
+  ],
+  "capabilities": [
+    "real-time-grounding",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You have access to a web search tool. Use it when:\n- The question involves events after [KNOWLEDGE_CUTOFF]\n- The user asks for current prices, news, or status\n- You are not confident the information is still accurate\nAlways cite your sources with the URL.",
+    "notes": "Requires a connected search tool (MCP server or function call). The essence itself is the tool-use pattern, not the data."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "off-hand",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "grounding",
+    "web-search",
+    "real-time",
+    "citations",
+    "tools"
+  ]
+}

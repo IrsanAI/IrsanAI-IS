@@ -1,0 +1,33 @@
+{
+  "id": "browser-control",
+  "name": "Browser Control",
+  "description": "Ability to navigate web browsers, interact with UI elements, fill forms, extract page content, and execute multi-step web automations. Enables agentic web interaction beyond simple search.",
+  "tier": "rare",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "tool-config",
+    "system-prompt"
+  ],
+  "capabilities": [
+    "function-calling",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You have browser control tools. When navigating:\n1. Always confirm the current URL before acting\n2. Wait for page load before interacting with elements\n3. Extract and verify content after each action\n4. If an action fails, try an alternative approach before giving up\n5. Never submit forms with sensitive data without explicit user confirmation",
+    "notes": "Requires a browser MCP server or Playwright/Puppeteer tool integration."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "off-hand",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "browser",
+    "web-automation",
+    "ui-interaction",
+    "forms",
+    "scraping"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "mythos-advanced-reasoning",
+  "name": "Mythos Advanced Reasoning",
+  "description": "Frontier-tier reasoning capability exclusive to Claude Mythos Preview. Represents the upper bound of current AI reasoning -- complex multi-domain synthesis, adversarial robustness, and metacognitive self-correction at a level not yet publicly available.",
+  "tier": "mythic",
+  "sourceModelId": "claude-mythos-preview",
+  "transferMethods": [
+    "model-specific"
+  ],
+  "capabilities": [
+    "reasoning",
+    "text-generation",
+    "structured-output"
+  ],
+  "transferArtifact": {
+    "notes": "Non-transferable via prompt engineering. This essence is model-specific to Claude Mythos Preview. A partial approximation can be achieved by co-equipping deep-reasoning + metacognitive-eval, but the mythic-tier capability requires the source model."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "mythic",
+    "frontier",
+    "glasswing",
+    "restricted",
+    "reasoning"
+  ]
+}

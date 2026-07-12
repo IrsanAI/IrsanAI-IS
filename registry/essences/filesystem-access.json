@@ -1,0 +1,33 @@
+{
+  "id": "filesystem-access",
+  "name": "Filesystem Access",
+  "description": "Ability to read, write, move, and manage files and directories. Enables agents to work with local codebases, documents, and data files directly without manual copy-paste.",
+  "tier": "common",
+  "sourceModelId": "claude-sonnet-4-6",
+  "transferMethods": [
+    "tool-config",
+    "system-prompt"
+  ],
+  "capabilities": [
+    "function-calling",
+    "text-generation"
+  ],
+  "transferArtifact": {
+    "systemPromptBlueprint": "You have filesystem access tools. Always:\n1. Read files before modifying them\n2. Confirm destructive operations (delete, overwrite) with the user\n3. Work within the project root -- never access paths outside [PROJECT_ROOT]\n4. After writing a file, verify the write succeeded by reading it back",
+    "notes": "Requires a filesystem MCP server. Claude Code ships with this enabled by default."
+  },
+  "compatibleSlots": [
+    "primary-weapon",
+    "off-hand",
+    "any"
+  ],
+  "incompatibleWith": [],
+  "requiresEssences": [],
+  "tags": [
+    "filesystem",
+    "files",
+    "read-write",
+    "local",
+    "mcp"
+  ]
+}
