@@ -1,25 +1,7 @@
-# package.json patch
+# Root package.json -- add test scripts to "scripts":
 
-Add this line to the `scripts` section in the root package.json:
+"test":          "turbo test",
+"test:coverage": "turbo test:coverage"
 
-```json
-"validate:registry": "tsx --env-file=.env scripts/validate-registry.ts",
-"validate:registry:verbose": "tsx --env-file=.env scripts/validate-registry.ts --verbose",
-"validate:registry:fix": "tsx --env-file=.env scripts/validate-registry.ts --verbose --fix-hints"
-```
-
-Full scripts block after patch:
-
-```json
-"scripts": {
-  "build":                    "turbo build",
-  "dev":                      "turbo dev",
-  "lint":                     "turbo lint",
-  "type-check":               "turbo type-check",
-  "clean":                    "turbo clean",
-  "example":                  "tsx --env-file=.env examples/basic-usage.ts",
-  "validate:registry":        "tsx --env-file=.env scripts/validate-registry.ts",
-  "validate:registry:verbose":"tsx --env-file=.env scripts/validate-registry.ts --verbose",
-  "validate:registry:fix":    "tsx --env-file=.env scripts/validate-registry.ts --verbose --fix-hints"
-}
-```
+# Also add to turbo.json "tasks":
+# "test": { "dependsOn": ["^build"], "cache": false }
