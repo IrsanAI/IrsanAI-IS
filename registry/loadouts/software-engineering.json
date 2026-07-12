@@ -1,11 +1,8 @@
 {
   "id": "software-engineering",
   "name": "Software Engineering",
-  "description": "Optimized for code generation, debugging, architecture design, refactoring and technical problem-solving across all major programming languages.",
-  "taskTypes": [
-    "software-engineering",
-    "devops-automation"
-  ],
+  "description": "Optimized for code generation, debugging, architecture design, refactoring, DevOps automation and technical problem-solving across all major programming languages.",
+  "taskTypes": ["software-engineering", "devops-automation"],
   "primaryLlmId": "claude-sonnet-4-6",
   "memory": {
     "provider": "supabase-pgvector",
@@ -13,56 +10,22 @@
     "windowSizeTokens": 32000
   },
   "tools": [
-    {
-      "name": "code-execution",
-      "type": "mcp-server",
-      "isRequired": true
-    },
-    {
-      "name": "filesystem-access",
-      "type": "mcp-server",
-      "isRequired": false
-    },
-    {
-      "name": "git-tools",
-      "type": "mcp-server",
-      "isRequired": false
-    }
+    {"name": "code-execution", "type": "mcp-server", "isRequired": true},
+    {"name": "filesystem-access", "type": "mcp-server", "isRequired": false},
+    {"name": "git-tools", "type": "mcp-server", "isRequired": false}
   ],
-  "activeEssenceIds": [
-    "instruction-following",
-    "code-generation",
-    "long-context-reasoning"
-  ],
+  "activeEssenceIds": ["instruction-following", "code-generation", "long-context-reasoning"],
   "routing": {
     "triggerKeywords": [
-      "code",
-      "debug",
-      "implement",
-      "refactor",
-      "build",
-      "function",
-      "class",
-      "TypeScript",
-      "Python",
-      "error",
-      "bug",
-      "test",
-      "deploy",
-      "script",
-      "module",
-      "API",
-      "endpoint",
-      "schema",
-      "zod"
+      "code", "debug", "implement", "refactor", "build", "function", "class",
+      "TypeScript", "Python", "error", "bug", "test", "deploy", "script",
+      "module", "API", "endpoint", "schema", "zod", "workflow", "CI", "CD",
+      "pipeline", "docker", "github actions", "automation", "devops", "bash"
     ],
-    "minConfidence": 0.75
+    "minConfidence": 0.7,
+    "priority": 0
   },
   "metrics": {},
-  "isDefault": false,
-  "tags": [
-    "coding",
-    "engineering",
-    "devops"
-  ]
+  "isDefault": true,
+  "tags": ["coding", "engineering", "devops", "automation"]
 }

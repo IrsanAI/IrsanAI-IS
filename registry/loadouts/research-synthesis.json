@@ -1,12 +1,8 @@
 {
   "id": "research-synthesis",
   "name": "Research & Synthesis",
-  "description": "Deep research synthesis across long documents, web sources and structured data. Optimized for accuracy, citations and multi-source cross-referencing.",
-  "taskTypes": [
-    "research-synthesis",
-    "data-analysis",
-    "document-processing"
-  ],
+  "description": "Deep research synthesis across long documents, web sources and structured data. Optimized for accuracy, citations, multi-source cross-referencing and statistical data analysis.",
+  "taskTypes": ["research-synthesis", "data-analysis", "document-processing"],
   "primaryLlmId": "claude-opus-4-6",
   "offHandLlmId": "gpt-4o",
   "memory": {
@@ -15,44 +11,21 @@
     "windowSizeTokens": 64000
   },
   "tools": [
-    {
-      "name": "web-search",
-      "type": "mcp-server",
-      "isRequired": true
-    },
-    {
-      "name": "document-reader",
-      "type": "mcp-server",
-      "isRequired": false
-    }
+    {"name": "web-search", "type": "mcp-server", "isRequired": true},
+    {"name": "document-reader", "type": "mcp-server", "isRequired": false}
   ],
-  "activeEssenceIds": [
-    "instruction-following",
-    "long-context-reasoning",
-    "metacognitive-eval"
-  ],
+  "activeEssenceIds": ["instruction-following", "long-context-reasoning", "metacognitive-eval"],
   "routing": {
     "triggerKeywords": [
-      "research",
-      "summarize",
-      "compare",
-      "analyze",
-      "synthesize",
-      "report",
-      "literature",
-      "document",
-      "paper",
-      "study",
-      "find",
-      "explain"
+      "research", "summarize", "compare", "analyze", "synthesize", "report",
+      "literature", "document", "paper", "study", "find", "explain",
+      "data", "dataset", "statistics", "outlier", "trend", "CSV", "chart",
+      "graph", "distribution", "correlation", "benchmark"
     ],
-    "minConfidence": 0.7
+    "minConfidence": 0.7,
+    "priority": 5
   },
   "metrics": {},
   "isDefault": false,
-  "tags": [
-    "research",
-    "synthesis",
-    "documents"
-  ]
+  "tags": ["research", "synthesis", "documents", "data-analysis", "statistics"]
 }

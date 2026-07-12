@@ -1,0 +1,27 @@
+{
+  "id": "planning-strategy",
+  "name": "Planning & Strategy",
+  "description": "Architecture design, system planning, strategic decision-making, schema design and high-level problem decomposition. Optimized for structured thinking and long-horizon reasoning.",
+  "taskTypes": ["planning-strategy", "multimodal-analysis"],
+  "primaryLlmId": "claude-opus-4-6",
+  "memory": {
+    "provider": "supabase-pgvector",
+    "strategy": "episodic",
+    "windowSizeTokens": 48000
+  },
+  "tools": [],
+  "activeEssenceIds": ["instruction-following", "deep-reasoning", "long-context-reasoning", "metacognitive-eval"],
+  "routing": {
+    "triggerKeywords": [
+      "design", "architecture", "plan", "strategy", "schema", "structure",
+      "system", "model", "database", "roadmap", "decision", "tradeoff",
+      "approach", "consider", "evaluate", "multi-tenant", "scalable",
+      "pattern", "best practice", "how to", "should I", "recommend"
+    ],
+    "minConfidence": 0.7,
+    "priority": 3
+  },
+  "metrics": {},
+  "isDefault": false,
+  "tags": ["planning", "architecture", "strategy", "design", "system-design"]
+}
